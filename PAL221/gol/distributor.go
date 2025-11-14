@@ -193,7 +193,7 @@ func readInitialState(p Params, d distributorChannels) [][]uint8 {
 	}
 	return state
 }
-
+done := make(chan []util.Cell, p.Threads)
 //func solve(done chan util.Cell, state [][]uint8, newstate [][]uint8) {}
 
 // distributor divides the work between workers and interacts with other goroutines.
@@ -298,7 +298,8 @@ func distributor(p Params, c distributorChannels) {
 			if !pause {
 				// fmt.Println("into default")
 				//buffered channel
-				done := make(chan []util.Cell, p.ImageHeight*p.ImageWidth) //总容量为棋盘pixel总数，用于存储需要“反转”更新的细胞，传递至SDL
+				//done := make(chan []util.Cell, p.ImageHeight*p.ImageWidth) //总容量为棋盘pixel总数，用于存储需要“反转”更新的细胞，传递至SDL
+				done := make(chan []util.Cell, p.Threads)
 
 				//初始化棋盘, new cell board
 				newState := make([][]uint8, p.ImageHeight) // ImageHeight 列
