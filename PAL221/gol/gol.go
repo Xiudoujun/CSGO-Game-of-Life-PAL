@@ -45,6 +45,7 @@ func Run(p Params, events chan<- Event, keyPresses <-chan rune) {
 		ioFilename: ioFilename,
 		ioOutput:   ioOutput,
 		ioInput:    ioInput,
+		keyPress:   keyPress,
 	}
 	distributor(p, distributorChannels)
 }
